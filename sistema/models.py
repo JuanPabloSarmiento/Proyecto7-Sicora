@@ -50,7 +50,7 @@ class historial_riego(models.Model):
     
     fecha = models.DateField()
     duracion = models.TimeField()
-    cantidad_de_agua = models.FloatField()
+    cantidad_agua = models.FloatField()
     def __str__(self):
         return self.duracion
 
