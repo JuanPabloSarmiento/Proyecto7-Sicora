@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from sistema.models import *
+from sistema.models import (
+    usuario, zona_riego, sensor, 
+    configuracion_riego,
+    lectura_sensor,
+    historial_riego,
+    mantenimiento,
+)
 
 class usuarioSerializer(serializers.ModelSerializer):
     class Meta:
