@@ -4,44 +4,44 @@ from sistema.models import *
 class usuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = usuario
-        fields = '__all__'
-        read_only_fields = ['id_usuario','nombre']
+        fields = ('id_usuario', 'nombre', 'correo', 'contraseña', 'rol')
+        read_only_fields = ['id_usuario']
     
 
 class zona_de_riegoSerializer(serializers.ModelSerializer):
     class Meta:
         model = zona_riego 
-        fields = '__all__'
+        fields = ('id_zona', 'nombre_zona', 'tipo_planta', 'necesidades_hidricas', 'exposicion_solar')
         read_only_fields = ['id_zona']
 
 class sensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = sensor
-        fields = '__all__'
-        read_only_fields = ['id_sensor','id_zona']
+        fields = ('id_sensor', 'tipo', 'estado')
+        read_only_fields = ['id_sensor']
 
 
 class configuracionSerializer(serializers.ModelSerializer):
     class Meta:
         model = configuracion_riego
-        fields = '__all__'
-        read_only_fields = ['id_configuracion','id_zona']
+        fields = ('id_configuracion', 'frecuencia', 'hora_inicio', 'duracion', 'tipo_riego', 'caudal', 'presion')
+        read_only_fields = ['id_configuracion']
 
 class lectura_sensorSeriaizer(serializers.ModelSerializer):
     class Meta:
         model = lectura_sensor
-        fields = '__all__'
-        read_only_fields = ['id_lectura','id_sensor']
+        fields = ('id_lectura', 'fecha_hora', 'valor')
+        read_only_fields = ['id_lectura']
 
 class historial_riego(serializers.ModelSerializer):
     class Meta:
         model = historial_riego
-        fields = '__all__'
-        read_only_fields = ['id_historial','id_zona']
+        fields = ('id_historial', 'fecha', 'duracion', 'cantidad_agua')
+        read_only_fields = ['id_historial']
 
 class mantenimientoSerializer(serializers.ModelSerializer):
     class Meta:
         model = mantenimiento
-        fields = '__all__'
-        read_only_fields = ['id_mantenimiento','id_zona']
+        fields = ('id_mantenimiento', 'fecha', 'descripcion', 'tipo')
+        read_only_fields = ['id_mantenimiento']
 
