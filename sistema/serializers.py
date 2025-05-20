@@ -14,7 +14,7 @@ class usuarioSerializer(serializers.ModelSerializer):
         read_only_fields = ['id_usuario']
     
 
-class zona_de_riegoSerializer(serializers.ModelSerializer):
+class zona_riegoSerializer(serializers.ModelSerializer):
     class Meta:
         model = zona_riego 
         fields = ('id_zona', 'nombre_zona', 'tipo_planta', 'necesidades_hidricas', 'exposicion_solar')
@@ -39,7 +39,7 @@ class lectura_sensorSeriaizer(serializers.ModelSerializer):
         fields = ('id_lectura', 'fecha_hora', 'valor')
         read_only_fields = ['id_lectura']
 
-class historial_riego(serializers.ModelSerializer):
+class historial_riegoSerializer(serializers.ModelSerializer):
     class Meta:
         model = historial_riego
         fields = ('id_historial', 'fecha', 'duracion', 'cantidad_agua')
