@@ -13,26 +13,26 @@ class zona_riegoViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post', 'put', 'delete']
 
 class sensorViewSet(viewsets.ModelViewSet):
-    queryset = usuario.objects.all()
+    queryset = sensor.objects.all()
     serializer_class =  sensorSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 
 class configuracion_riegoViewSet(viewsets.ModelViewSet):
-    queryset = usuario.objects.all()
+    queryset = configuracion_riego.objects.all()
     serializer_class = configuracion_riegoSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 
 class lectura_sensorViewSet(viewsets.ModelViewSet):
-    queryset = usuario.objects.all()
+    queryset = lectura_sensor.objects.all()
     serializer_class = lectura_sensorSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 
 class historial_riegoViewSet(viewsets.ModelViewSet):
-    queryset = usuario.objects.all()
+    queryset =  historial_riego.objects.all()
     serializer_class = historial_riegoSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 
 class mantenimientoViewSet(viewsets.ModelViewSet):
-    queryset = usuario.objects.all()
+    queryset =  mantenimiento.objects.all()
     serializer_class = mantenimientoSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
