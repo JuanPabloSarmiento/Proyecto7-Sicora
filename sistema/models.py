@@ -2,7 +2,7 @@ from django.db import models
 
 from django.db import models
 
-class Usuario(models.Model):
+class usuario(models.Model):
     ROLES = [
         ('admin', 'Administrador'),
         ('empleado', 'Empleado'),
