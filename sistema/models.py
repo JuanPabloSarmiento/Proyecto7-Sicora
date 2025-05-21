@@ -5,12 +5,12 @@ from django.db import models
 class usuario(models.Model):
     ROLES = [
         ('admin', 'Administrador'),
-        ('empleado', 'Empleado'),
+        ('operario', 'Operario'),
     ]
     nombre = models.CharField(max_length=50)
     correo = models.EmailField(max_length=100, unique=True)
     contraseña = models.CharField(max_length=100)
-    rol = models.CharField(max_length=20, choices=ROLES, default='cliente')
+    rol = models.CharField(max_length=20, choices=ROLES, default='operario')
 
     def __str__(self):
         return f"{self.nombre} ({self.get_rol_display()})"
