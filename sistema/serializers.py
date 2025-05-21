@@ -10,44 +10,44 @@ from sistema.models import (
 class usuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = usuario
-        fields = ('id_usuario', 'nombre', 'correo', 'contraseña', 'rol')
+        fields = ('id', 'nombre', 'correo', 'contraseña', 'rol')
         read_only_fields = ['id_usuario']
     
 
 class zona_riegoSerializer(serializers.ModelSerializer):
     class Meta:
         model = zona_riego 
-        fields = ('id_zona', 'nombre_zona', 'tipo_planta', 'necesidades_hidricas', 'exposicion_solar')
+        fields = ('id', 'nombre_zona', 'tipo_planta', 'necesidades_hidricas', 'exposicion_solar')
         read_only_fields = ['id_zona']
 
 class sensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = sensor
-        fields = ('id_sensor', 'tipo', 'estado')
+        fields = ('id', 'tipo', 'estado')
         read_only_fields = ['id_sensor']
 
 
 class configuracionSerializer(serializers.ModelSerializer):
     class Meta:
         model = configuracion_riego
-        fields = ('id_configuracion', 'frecuencia', 'hora_inicio', 'duracion', 'tipo_riego', 'caudal', 'presion')
+        fields = ('id', 'frecuencia', 'hora_inicio', 'duracion', 'tipo_riego', 'caudal', 'presion')
         read_only_fields = ['id_configuracion']
 
 class lectura_sensorSeriaizer(serializers.ModelSerializer):
     class Meta:
         model = lectura_sensor
-        fields = ('id_lectura', 'fecha_hora', 'valor')
+        fields = ('id', 'fecha_hora', 'valor')
         read_only_fields = ['id_lectura']
 
 class historial_riegoSerializer(serializers.ModelSerializer):
     class Meta:
         model = historial_riego
-        fields = ('id_historial', 'fecha', 'duracion', 'cantidad_agua')
+        fields = ('id', 'fecha', 'duracion', 'cantidad_agua')
         read_only_fields = ['id_historial']
 
 class mantenimientoSerializer(serializers.ModelSerializer):
     class Meta:
         model = mantenimiento
-        fields = ('id_mantenimiento', 'fecha', 'descripcion', 'tipo')
+        fields = ('id', 'fecha', 'descripcion', 'tipo')
         read_only_fields = ['id_mantenimiento']
 
