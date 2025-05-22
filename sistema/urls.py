@@ -21,5 +21,5 @@ router.register(r'historial', historial_riegoViewSet)
 router.register(r'mantenimientos', mantenimientoViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
 ]
