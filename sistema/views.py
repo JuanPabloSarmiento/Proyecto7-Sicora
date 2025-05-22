@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from .models import ( usuario, zona_riego, sensor, configuracion_riego, lectura_sensor, historial_riego, mantenimiento )
-from .serializers import ( usuarioSerializer, zona_riegoSerializer, sensorSerializer, configuracionSerializer,
+from .serializers import ( usuarioSerializer, zona_riegoSerializer, sensorSerializer, configuracion_riegoSerializer,
                            lectura_sensorSeriaizer, historial_riegoSerializer, mantenimientoSerializer )
 
 class usuarioViewSet(viewsets.ModelViewSet):
@@ -20,7 +20,7 @@ class sensorViewSet(viewsets.ModelViewSet):
 
 class configuracion_riegoViewSet(viewsets.ModelViewSet):
     queryset = configuracion_riego.objects.all()
-    serializer_class = configuracionSerializer
+    serializer_class = configuracion_riegoSerializer
     http_method_names = ['get', 'post', 'put', 'delete']
 
 class lectura_sensorViewSet(viewsets.ModelViewSet):
