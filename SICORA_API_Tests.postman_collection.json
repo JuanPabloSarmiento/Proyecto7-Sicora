@@ -159,7 +159,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"nombre\": \"Nombre Actualizado\",\n    \"correo\": \"usuario_actualizado@example.com\",\n    \"rol\": \"admin\"\n}"
+              "raw": "{\n    \"nombre\": \"Nombre Actualizado\",\n    \"correo\": \"usuario_actualizado@example.com\",\n \"contraseña\": \"password123\",\n   \"rol\": \"admin\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/usuarios/:id/",
