@@ -32,7 +32,7 @@ class sensorSerializer(serializers.ModelSerializer):
         read_only_fields = ['id']
 
 
-class configuracionSerializer(serializers.ModelSerializer):
+class configuracion_riegoSerializer(serializers.ModelSerializer):
     class Meta:
         model = configuracion_riego
         fields = ('id', 'frecuencia', 'hora_inicio', 'duracion', 'tipo_riego', 'caudal', 'presion')
