@@ -39,7 +39,7 @@ class configuracion_riego(models.Model):
     frecuencia = models.TimeField()
     hora_inicio = models.TimeField()
     duracion = models.TimeField()
-    tipo_de_riego = models.CharField(max_length=50)
+    tipo_riego = models.CharField(max_length=50)
     caudal = models.FloatField()
     presion = models.FloatField()
     def __str__(self):
