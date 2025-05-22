@@ -1,0 +1,1652 @@
+{
+  "info": {
+    "_postman_id": "YOUR_COLLECTION_ID",
+    "name": "SICORA API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "A collection of requests to test the SICORA API endpoints."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "List All Usuarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Single Usuario",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the user to retrieve"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an object\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('object');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create New Usuario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"Nombre Apellido\",\n    \"correo\": \"usuario@example.com\",\n    \"contraseña\": \"password123\",\n    \"rol\": \"operario\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains created data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.nombre).to.eql(\"Nombre Apellido\");",
+                  "    pm.expect(responseData.correo).to.eql(\"usuario@example.com\");",
+                  "    pm.expect(responseData.rol_display).to.exist;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Existing Usuario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"Nombre Actualizado\",\n    \"correo\": \"usuario_actualizado@example.com\",\n    \"rol\": \"admin\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the user to update"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains updated data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.nombre).to.eql(\"Nombre Actualizado\");",
+                  "    pm.expect(responseData.correo).to.eql(\"usuario_actualizado@example.com\");",
+                  "    pm.expect(responseData.rol_display).to.eql(\"Administrador\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Usuario",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the user to delete"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Requests for managing usuarios"
+    },
+    {
+      "name": "Zonas de Riego",
+      "item": [
+        {
+          "name": "List All Zonas de Riego",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/zonas/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "zonas",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Single Zona de Riego",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/zonas/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "zonas",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the zona de riego to retrieve"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an object\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('object');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create New Zona de Riego",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre_zona\": \"Zona Jardín Delantero\",\n    \"tipo_planta\": \"Césped\",\n    \"necesidades_hidricas\": \"Moderadas\",\n    \"exposicion_solar\": \"Pleno sol\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/zonas/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "zonas",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains created data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.nombre_zona).to.eql(\"Zona Jardín Delantero\");",
+                  "    pm.expect(responseData.tipo_planta).to.eql(\"Césped\");",
+                  "    pm.expect(responseData.necesidades_hidricas).to.eql(\"Moderadas\");",
+                  "    pm.expect(responseData.exposicion_solar).to.eql(\"Pleno sol\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Existing Zona de Riego",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre_zona\": \"Zona Jardín Trasero\",\n    \"tipo_planta\": \"Flores Ornamentales\",\n    \"necesidades_hidricas\": \"Altas\",\n    \"exposicion_solar\": \"Sombra parcial\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/zonas/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "zonas",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the zona de riego to update"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains updated data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.nombre_zona).to.eql(\"Zona Jardín Trasero\");",
+                  "    pm.expect(responseData.tipo_planta).to.eql(\"Flores Ornamentales\");",
+                  "    pm.expect(responseData.necesidades_hidricas).to.eql(\"Altas\");",
+                  "    pm.expect(responseData.exposicion_solar).to.eql(\"Sombra parcial\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Zona de Riego",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/zonas/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "zonas",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the zona de riego to delete"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Requests for managing zonas de riego"
+    },
+    {
+      "name": "Sensores",
+      "item": [
+        {
+          "name": "List All Sensores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sensores/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sensores",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Single Sensor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sensores/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sensores",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the sensor to retrieve"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an object\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('object');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create New Sensor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"tipo\": \"Humedad\",\n    \"estado\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sensores/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sensores",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains created data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.tipo).to.eql(\"Humedad\");",
+                  "    pm.expect(responseData.estado).to.eql(true);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Existing Sensor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"tipo\": \"Temperatura\",\n    \"estado\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sensores/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sensores",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the sensor to update"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains updated data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.tipo).to.eql(\"Temperatura\");",
+                  "    pm.expect(responseData.estado).to.eql(false);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Sensor",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sensores/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sensores",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the sensor to delete"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Requests for managing sensores"
+    },
+    {
+      "name": "Configuraciones de Riego",
+      "item": [
+        {
+          "name": "List All Configuraciones de Riego",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/configuraciones/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "configuraciones",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Single Configuracion de Riego",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/configuraciones/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "configuraciones",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the configuracion de riego to retrieve"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an object\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('object');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create New Configuracion de Riego",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"frecuencia\": \"08:00:00\",\n    \"hora_inicio\": \"06:00:00\",\n    \"duracion\": \"00:30:00\",\n    \"tipo_riego\": \"Goteo\",\n    \"caudal\": 5.5,\n    \"presion\": 1.2\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/configuraciones/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "configuraciones",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains created data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.frecuencia).to.eql(\"08:00:00\");",
+                  "    pm.expect(responseData.hora_inicio).to.eql(\"06:00:00\");",
+                  "    pm.expect(responseData.duracion).to.eql(\"00:30:00\");",
+                  "    pm.expect(responseData.tipo_riego).to.eql(\"Goteo\");",
+                  "    pm.expect(responseData.caudal).to.eql(5.5);",
+                  "    pm.expect(responseData.presion).to.eql(1.2);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Existing Configuracion de Riego",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"frecuencia\": \"12:00:00\",\n    \"hora_inicio\": \"07:00:00\",\n    \"duracion\": \"00:45:00\",\n    \"tipo_riego\": \"Aspersión\",\n    \"caudal\": 7.0,\n    \"presion\": 1.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/configuraciones/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "configuraciones",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the configuracion de riego to update"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains updated data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.frecuencia).to.eql(\"12:00:00\");",
+                  "    pm.expect(responseData.hora_inicio).to.eql(\"07:00:00\");",
+                  "    pm.expect(responseData.duracion).to.eql(\"00:45:00\");",
+                  "    pm.expect(responseData.tipo_riego).to.eql(\"Aspersión\");",
+                  "    pm.expect(responseData.caudal).to.eql(7.0);",
+                  "    pm.expect(responseData.presion).to.eql(1.5);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Configuracion de Riego",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/configuraciones/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "configuraciones",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the configuracion de riego to delete"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Requests for managing configuraciones de riego"
+    },
+    {
+      "name": "Lecturas de Sensor",
+      "item": [
+        {
+          "name": "List All Lecturas de Sensor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/lecturas/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "lecturas",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Single Lectura de Sensor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/lecturas/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "lecturas",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the lectura de sensor to retrieve"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an object\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('object');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create New Lectura de Sensor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fecha_hora\": \"2023-10-26\",\n    \"valor\": 25.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/lecturas/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "lecturas",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains created data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.fecha_hora).to.eql(\"2023-10-26\");",
+                  "    pm.expect(responseData.valor).to.eql(25.5);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Existing Lectura de Sensor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fecha_hora\": \"2023-10-27\",\n    \"valor\": 28.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/lecturas/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "lecturas",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the lectura de sensor to update"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains updated data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.fecha_hora).to.eql(\"2023-10-27\");",
+                  "    pm.expect(responseData.valor).to.eql(28.0);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Lectura de Sensor",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/lecturas/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "lecturas",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the lectura de sensor to delete"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Requests for managing lecturas de sensor"
+    },
+    {
+      "name": "Historial de Riego",
+      "item": [
+        {
+          "name": "List All Historial de Riego",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/historial/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "historial",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Single Historial de Riego Entry",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/historial/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "historial",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the historial de riego entry to retrieve"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an object\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('object');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create New Historial de Riego Entry",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fecha\": \"2023-10-26\",\n    \"duracion\": \"00:20:00\",\n    \"cantidad_agua\": 15.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/historial/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "historial",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains created data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.fecha).to.eql(\"2023-10-26\");",
+                  "    pm.expect(responseData.duracion).to.eql(\"00:20:00\");",
+                  "    pm.expect(responseData.cantidad_agua).to.eql(15.0);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Existing Historial de Riego Entry",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fecha\": \"2023-10-27\",\n    \"duracion\": \"00:25:00\",\n    \"cantidad_agua\": 18.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/historial/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "historial",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the historial de riego entry to update"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains updated data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.fecha).to.eql(\"2023-10-27\");",
+                  "    pm.expect(responseData.duracion).to.eql(\"00:25:00\");",
+                  "    pm.expect(responseData.cantidad_agua).to.eql(18.5);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Historial de Riego Entry",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/historial/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "historial",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the historial de riego entry to delete"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Requests for managing historial de riego"
+    },
+    {
+      "name": "Mantenimientos",
+      "item": [
+        {
+          "name": "List All Mantenimientos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mantenimientos/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mantenimientos",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Single Mantenimiento",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mantenimientos/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mantenimientos",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the mantenimiento to retrieve"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response body is an object\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('object');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create New Mantenimiento",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fecha\": \"2023-11-15\",\n    \"descripcion\": \"Limpieza de filtros del sistema.\",\n    \"tipo\": \"Preventivo\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/mantenimientos/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mantenimientos",
+                ""
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains created data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.fecha).to.eql(\"2023-11-15\");",
+                  "    pm.expect(responseData.descripcion).to.eql(\"Limpieza de filtros del sistema.\");",
+                  "    pm.expect(responseData.tipo).to.eql(\"Preventivo\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Existing Mantenimiento",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fecha\": \"2023-11-16\",\n    \"descripcion\": \"Reemplazo de sensor de humedad S02.\",\n    \"tipo\": \"Correctivo\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/mantenimientos/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mantenimientos",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the mantenimiento to update"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"Response contains updated data\", function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData.fecha).to.eql(\"2023-11-16\");",
+                  "    pm.expect(responseData.descripcion).to.eql(\"Reemplazo de sensor de humedad S02.\");",
+                  "    pm.expect(responseData.tipo).to.eql(\"Correctivo\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Mantenimiento",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/mantenimientos/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "mantenimientos",
+                ":id",
+                ""
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID of the mantenimiento to delete"
+                }
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Requests for managing mantenimientos"
+    }
+  ]
+}
