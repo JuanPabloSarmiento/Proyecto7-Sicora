@@ -14,7 +14,6 @@ class usuario(models.Model):
 
     def __str__(self):
         return f"{self.nombre} ({self.get_rol_display()})"
-
     
 class zona_riego(models.Model):
     
@@ -31,8 +30,6 @@ class sensor(models.Model):
     estado = models.BooleanField()
     def __str__(self):
         return self.tipo
-    
-
 
 class configuracion_riego(models.Model):
     
@@ -50,8 +47,7 @@ class lectura_sensor(models.Model):
     fecha_hora = models.DateField()
     valor = models.FloatField()
     def __str__(self):
-        return self.valor
-    
+        return self.valor 
 
 class historial_riego(models.Model):
     
