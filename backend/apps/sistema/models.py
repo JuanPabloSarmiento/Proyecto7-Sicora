@@ -39,12 +39,16 @@ class sensor(models.Model):
 
 # Modelo de lectura de sensor
 class lectura_sensor(models.Model):
-    # Campos de lectura
-    fecha_hora = models.DateField()  # Fecha y hora de la lectura
-    valor = models.FloatField()  # Valor registrado por el sensor
+    fecha_hora = models.DateTimeField()  # Fecha y hora completa
+    valor = models.FloatField()  # Valor registrado
+    unidad = models.CharField(
+        max_length=10,
+        choices=[('porcentaje', 'Porcentaje'), ('grados', 'Grados')],
+        default='porcentaje'
+    )
 
     def __str__(self):
-        # Retorna el valor de la lectura
-        return self.valor
-
+        simbolo = "%" if self.unidad == "porcentaje" else "°"
+        return f"{self.valor}{simbolo} - {self.fecha_hora}"
+    
 # fin del archivo sistema/models.py

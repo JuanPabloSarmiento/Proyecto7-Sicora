@@ -32,7 +32,7 @@ class configuracion_riegoSerializer(serializers.ModelSerializer):
 class lectura_sensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = lectura_sensor  # Modelo a serializar
-        fields = ('id', 'fecha_hora', 'valor')
+        fields = ('id', 'fecha_hora', 'valor', 'unidad')
         read_only_fields = ['id']
 
 # Fin del archivo sistema/serializers.py
