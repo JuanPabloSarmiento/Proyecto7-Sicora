@@ -35,5 +35,5 @@ class configuracion_riegoViewSet(viewsets.ModelViewSet):
 class lectura_sensorViewSet(viewsets.ModelViewSet):
     queryset = lectura_sensor.objects.all()  # Consulta todas las lecturas de sensores
     serializer_class = lectura_sensorSerializer  # Serializador para el modelo lectura_sensor
-    http_method_names = ['get', 'post']  # Métodos HTTP permitidos
+    http_method_names = ['get', 'post', 'put', 'delete']  # Métodos HTTP permitidos
     
