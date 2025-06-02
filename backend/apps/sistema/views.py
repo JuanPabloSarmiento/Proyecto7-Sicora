@@ -10,7 +10,7 @@ from apps.sistema.models import (
 # Importa los serializadores de la aplicación
 from apps.sistema.serializers import (
     zona_riegoSerializer, sensorSerializer, 
-    configuracion_riegoSerializer, lectura_sensorSeriaizer
+    configuracion_riegoSerializer, lectura_sensorSerializer
 )
 
 # ViewSet para el modelo zona_riego
@@ -34,6 +34,6 @@ class configuracion_riegoViewSet(viewsets.ModelViewSet):
 # ViewSet para el modelo lectura_sensor
 class lectura_sensorViewSet(viewsets.ModelViewSet):
     queryset = lectura_sensor.objects.all()  # Consulta todas las lecturas de sensores
-    serializer_class = lectura_sensorSeriaizer  # Serializador para el modelo lectura_sensor
+    serializer_class = lectura_sensorSerializer  # Serializador para el modelo lectura_sensor
     http_method_names = ['get', 'post']  # Métodos HTTP permitidos
     

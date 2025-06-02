@@ -1,13 +1,11 @@
 # Importa el módulo serializers de Django REST Framework
 from rest_framework import serializers
-
 # Importa los modelos definidos en la aplicación 'sistema'
 from apps.sistema.models import (
     zona_riego, sensor, 
     configuracion_riego,
     lectura_sensor,
 )
-
 
 # Serializador para el modelo zona_riego
 class zona_riegoSerializer(serializers.ModelSerializer):
@@ -31,7 +29,7 @@ class configuracion_riegoSerializer(serializers.ModelSerializer):
         read_only_fields = ['id']
 
 # Serializador para el modelo lectura_sensor
-class lectura_sensorSeriaizer(serializers.ModelSerializer):
+class lectura_sensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = lectura_sensor  # Modelo a serializar
         fields = ('id', 'fecha_hora', 'valor')
